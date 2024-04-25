@@ -30,6 +30,7 @@ log("Loading packages...", printLogs)
 
 if config.packages then
     for packageName,o in pairs(config.packages) do
+      if fs.exists("/cos/packages/" .. packageName .. ".lua") then
         local package = require("/cos/packages/" .. packageName)
         if package and package.metadata then
             log("queued " .. packageName .. " ", printLogs)
@@ -46,6 +47,8 @@ if config.packages then
             end
         elseif package then
           
+        else
+          log("!! " .. packageName .. " - not queued as its missing", printLogs)
         end
     end
 end
