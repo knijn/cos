@@ -12,7 +12,6 @@ _G.log = function(message, printed)
 end
 
 _G.cos_loaded_packages = {}
-
 _G.cos_packages_config = {}
 -- initial scan to build list of packages to load
 local toLoad = {}
