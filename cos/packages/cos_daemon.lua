@@ -16,8 +16,6 @@ daemon.startup = function()
             end
         end
     end, "cos_daemon")
-
-
     return true
 end
 
