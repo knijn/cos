@@ -37,6 +37,42 @@ Here's the folder structure:
 └── startup.lua (program that runs hook.lua)
 ```
 
+## List of packages and their respective configuration options
+```lua
+return {
+    silent_startup = false,
+    settings = {
+        ["path.programs"] = "/cos/programs/ccsmb10"
+    },
+    packages = {
+        cos_syslog = {
+            path = ".syslog",
+            daemon = true
+        },
+        cos_daemon = {},
+        cos_ls = {} -- Currently broken when running `ls`
+    }
+}
+```
+
+## Environment
+cOS makes the following information available in the environment:
+```lua
+_G.cos_loaded_packages -- A table of packages and wether they're loaded or not
+-- example:
+_G.cos_loaded_packages.syslog = "true" -- true if it loaded correctly, false if it didnt
+
+
+_G.cos_packages -- A table that a package can insert data into
+
+_G.cos_packages_config -- A table where each package gets their config inserted into
+-- example:
+_G.cos_packages_config.syslog = {
+            path = ".syslog",
+            daemon = true
+        },
+```
+
 ## Roadmap
 The following things are planned, but not implemented yet:
 - firstrun hook for packages
