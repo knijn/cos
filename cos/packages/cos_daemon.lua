@@ -1,7 +1,7 @@
 local daemon = {}
 daemon.metadata = {
-    name = "daemon",
-    description = "A daemon to manage cos packages",
+    name = "cos_daemon",
+    description = "A daemon to manage cos",
     license = "MIT",
     dependencies = {"redrun"}
 }
