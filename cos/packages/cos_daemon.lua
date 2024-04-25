@@ -21,6 +21,7 @@ daemon.startup = function()
                     if not _G.cos_loaded_packages[packageName] then
                         local package = require("cos/packages/" .. packageName)
                         if package.cleanup then
+                            log("Cleaning up package " .. packageName, arg1)
                             package.cleanup()
                             _G.cos_installed_packages[package] = nil
                         else
