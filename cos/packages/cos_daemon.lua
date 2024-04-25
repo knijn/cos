@@ -17,6 +17,7 @@ daemon.startup = function()
                 os.queueEvent("cos_daemon_response")
             elseif command == "cleanup" then
                 if not arg1 then arg1 = false end -- disable printing if not specified
+                log("Received cleanup command", arg1)
                 for packageName,o in pairs(_G.cos_installed_packages) do
                     if not _G.cos_loaded_packages[packageName] then
                         local package = require("cos/packages/" .. packageName)
