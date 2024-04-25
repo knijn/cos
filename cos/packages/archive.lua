@@ -20,4 +20,9 @@ archive.startup = function()
     end
     return true
 end
+
+archive.cleanup = function()
+    fs.delete("/cos/lib/archive.lua")
+end
+
 return archive
