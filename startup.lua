@@ -1,0 +1,1 @@
+shell.run("cos/hook.lua") -- initialise the startup hook for cos
