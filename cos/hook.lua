@@ -13,6 +13,7 @@ end
 
 _G.cos_loaded_packages = {}
 
+_G.cos_packages_config = {}
 -- initial scan to build list of packages to load
 local toLoad = {}
 local printLogs = true
@@ -65,6 +66,7 @@ for i=1,4 do
         log("loading " .. packageName .. " with priority " .. priority, printLogs)
         -- Let the package handle anything it needs to on every startup
         
+        _G.cos_packages_config[packageName] = config.packages[packageName]
         _G.cos_loaded_packages[packageName], errorObject = pcall(package.startup,config.packages[packageName])
         if not _G.cos_loaded_packages[packageName] then
           log("error loading " .. packageName .. "\n" .. errorObject, printLogs, "error")
