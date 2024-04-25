@@ -1,5 +1,5 @@
 local args = {...}
-    if args[1] == "install" then
+if args[1] == "install" then
       -- data[1].assets[1].browser_download_url
     local apiURL = "http://api.github.com/repos/knijn/cos/releases"
     local baseRepoURL = "https://github.com/knijn/cos"
