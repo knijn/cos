@@ -9,5 +9,6 @@ return {
             daemon = true
         },
         cos_daemon = {},
+        installer = {},
     }
 }
