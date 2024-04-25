@@ -5,6 +5,7 @@ return {
             path = ".syslog",
             daemon = true
         },
-        cos_daemon = {}
+        cos_daemon = {},
+        cos_ls = {}
     }
 }
