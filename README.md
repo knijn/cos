@@ -13,6 +13,10 @@ This practice is ignored by the system utilities in order to bundle system utili
 - Easy simple background runners using redrun
 - Easily expandable
 
+### Complaince
+We comply with the following standards
+- CCSMB-10
+
 ## Installation
 Run the following command to install the latest build
 ```
