@@ -9,6 +9,9 @@ Here's an example /cos/config.lua file
 ```lua
 return {
     silent_startup = false,
+    settings = {
+        ["path.programs"] = "/cos/programs/ccsmb10"
+    },
     packages = {
         syslog = {
             path = ".syslog",
