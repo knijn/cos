@@ -1,6 +1,6 @@
 # cOS, the configurable OS
 
-NOTE! cOS isn't done and this is currently in a proof of concept phase.
+NOTE! cOS isn't done and this is currently in a beta phase.
 
 cOS is a configurable OS inspired by NixOS built for ComputerCraft. The entire configuration of the OS is built from a single configuration file, which enables and disables specific elements of the OS. 
 Any package that isn't configured won't be enabled (unless another package relies on it) and thus won't be usable.
