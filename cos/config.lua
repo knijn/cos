@@ -9,6 +9,18 @@ return {
             daemon = true
         },
         cos_daemon = {},
-        installer = {},
+        installer = {
+            directories = {
+                "/cos/programs/",
+                "/cos/packages/"
+            },
+            files = {
+                "/cos/hook.lua",
+                "/startup.lua"
+            },
+            ignore = {
+                "/cos/programs/ccsmb10"
+            }
+        },
     }
 }
