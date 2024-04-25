@@ -63,9 +63,22 @@ elseif args[1] == "build" then
             --print(directory .. subdirectory)
             if fs.isDir(directory .. subdirectory) then
                 table.insert(directoryListing,directory .. subdirectory)
-                local files = fs.list(directory .. subdirectory)
-                for i,o in pairs(files) do
-                    table.insert(fileListing,directory .. subdirectory  .. "/".. o)
+                local subsubdirectories = fs.list(directory .. subdirectory)
+                
+                for i,subsubdirectory in pairs(subsubdirectories) do
+                    if fs.isDir(directory .. subdirectory .. "/" .. subsubdirectory .. "/") then
+                        table.insert(directoryListing,directory .. subdirectory  .. "/".. subsubdirectory)
+                        for i,subsubsubdirectory in pairs(fs.list(directory .. subdirectory .. "/" .. subsubdirectory .. "/")) do
+                            if fs.isDir(directory .. subdirectory .. "/" .. subsubdirectory .. "/" .. subsubsubdirectory) then
+                                table.insert(directoryListing,directory .. subdirectory  .. "/".. subsubdirectory .. "/" .. subsubsubdirectory)
+                            else
+                                table.insert(fileListing,directory .. subdirectory  .. "/".. subsubdirectory .. "/" .. subsubsubdirectory)
+                            end
+                            -- this is hell
+                        end
+                    else
+                      table.insert(fileListing,directory .. subdirectory  .. "/".. subsubdirectory)
+                    end
                 end
             else
                 table.insert(fileListing,directory .. subdirectory)
