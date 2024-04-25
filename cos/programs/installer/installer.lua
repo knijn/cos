@@ -32,6 +32,7 @@ if args[1] == "install" then
             h.close()
             
             for i,o in pairs(buildData.directories) do
+                print("d+ " .. o)
                 fs.makeDir(o)
             end
 
@@ -39,7 +40,9 @@ if args[1] == "install" then
                 local h = fs.open(file,"w")
                 h.write(fileData)
                 h.close()
+                print(" + " .. file)
             end
+            print("cOS has been installed, please reboot!")
             return
         end
     end
