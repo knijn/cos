@@ -4,6 +4,8 @@ NOTE! cOS isn't done and this is currently in a proof of concept phase.
 
 cOS is a configurable OS inspired by NixOS built for ComputerCraft. The entire configuration of the OS is built from a single configuration file, which enables and disables specific elements of the OS. 
 Any package that isn't configured won't be enabled (unless another package relies on it) and thus won't be usable.
+As the packages system is completely modular, anything can be done on startup. The intended way to use the packages system is to use a package as an installer for a package, not as the actual code of the package itself. 
+This practice is ignored by the system utilities in order to bundle system utilities with the OS itself.
 
 ## Features
 - Package installation from /cos/config.lua
@@ -29,8 +31,6 @@ return {
 }
 ```
 
-As the packages system is completely modular, anything can be done on startup. The intended way to use the packages system is to use a package as an installer for a package, not as the actual code of the package itself. 
-This practice is ignored by the system utilities in order to bundle system utilities with the OS itself.
 Here's the folder structure:
 ## File structure
 ```
