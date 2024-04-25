@@ -92,5 +92,4 @@ _G.cos_packages_config.syslog = {
 ## Roadmap
 The following things are planned, but not implemented yet:
 - firstrun hook for packages
-- CCSMB-10 compliance
 - CCSMB-9 compliance, whenever passed
