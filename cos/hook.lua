@@ -14,7 +14,7 @@ log("Basic log() overwrite done", true)
 
 _G.cos_loaded_packages = {}
 _G.cos_packages_config = {}
-_G.cos_installed_packages = {}
+_G.cos_installed_packages = settings.get("cos.installed_packages",{})
 -- initial scan to build list of packages to load
 local toLoad = {}
 local printLogs = true
@@ -123,3 +123,6 @@ for package,loaded in pairs(_G.cos_loaded_packages) do
     log("package " .. package .. " failed to load!", printLogs)
   end
 end
+
+settings.set("cos.installed_packages",_G.cos_installed_packages)
+settings.save()
