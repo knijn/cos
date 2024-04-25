@@ -4,7 +4,7 @@ installer.metadata = {
     description = "The cOS installer",
     license = "MIT",
     author = "EmmaKnijn",
-    dependencies = {"archive"}
+    dependencies = {}
 }
 
 installer.startup = function()
