@@ -14,6 +14,7 @@ log("Basic log() overwrite done", true)
 
 _G.cos_loaded_packages = {}
 _G.cos_packages_config = {}
+_G.cos_installed_packages = {}
 -- initial scan to build list of packages to load
 local toLoad = {}
 local printLogs = true
@@ -105,7 +106,9 @@ for i=1,4 do
         _G.cos_loaded_packages[packageName], errorObject = pcall(package.startup,config.packages[packageName])
         if not _G.cos_loaded_packages[packageName] then
           log("error loading " .. packageName .. "\n" .. errorObject, printLogs, "error")
-      end
+        elseif not _G.cos_downloaded_packages[packageName]  then
+          _G.cos_downloaded_packages[packageName] = true
+        end
       else
         log("!! " .. packageName .. " - not loaded as its missing", printLogs, "error")
         _G.cos_loaded_packages[packageName] = false
@@ -120,4 +123,3 @@ for package,loaded in pairs(_G.cos_loaded_packages) do
     log("package " .. package .. " failed to load!", printLogs)
   end
 end
-
