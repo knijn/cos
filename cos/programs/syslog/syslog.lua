@@ -9,9 +9,7 @@ local function checkAlive()
     local alive = false
     local function check()
         os.queueEvent("syslog_daemon","ping")
-        print("sent queue event", true)
         os.pullEvent("syslog_daemon_response")
-        print("got response", true)
         alive = true
     end
     local function timeout()
