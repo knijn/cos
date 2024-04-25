@@ -21,6 +21,13 @@ if config.silent_startup then
 end
 term.clear()
 term.setCursorPos(1,1)
+log("Setting .settings values...", printLogs)
+if config.settings then
+  for k,v in pairs(config.settings) do
+    settings.set(k,v)
+  end
+  settings.save()
+end
 
 log("Basic cOS initialisation done.", printLogs)
 log("Loading packages...", printLogs)
