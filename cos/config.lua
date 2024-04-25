@@ -9,6 +9,5 @@ return {
             daemon = true
         },
         cos_daemon = {},
-        cos_ls = {}
     }
 }
