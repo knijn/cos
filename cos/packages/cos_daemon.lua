@@ -14,12 +14,13 @@ daemon.startup = function()
             if command == "listActive" then 
                 os.queueEvent("cos_daemon_response",  _G.cos_loaded_packages)
             elseif command == "cleanup" then
-                for packageName,o in pairs(_G.cos_downloaded_packages) do
+                if not arg1 then arg1 = false end -- disable printing if not specified
+                for packageName,o in pairs(_G.cos_installed_packages) do
                     if not _G.cos_loaded_packages[packageName] then
                         local package = require("cos/packages/" .. packageName)
                         if package.cleanup then
                             package.cleanup()
-                            _G.cos_downloaded_packages[package] = nil
+                            _G.cos_installed_packages[package] = nil
                         else
                             log("Package " .. packageName .. " has no cleanup function and couldn't be cleaned up", false, "error")
                         end

@@ -106,8 +106,8 @@ for i=1,4 do
         _G.cos_loaded_packages[packageName], errorObject = pcall(package.startup,config.packages[packageName])
         if not _G.cos_loaded_packages[packageName] then
           log("error loading " .. packageName .. "\n" .. errorObject, printLogs, "error")
-        elseif not _G.cos_downloaded_packages[packageName]  then
-          _G.cos_downloaded_packages[packageName] = true
+        elseif not _G.cos_installed_packages[packageName]  then
+          _G.cos_installed_packages[packageName] = true
         end
       else
         log("!! " .. packageName .. " - not loaded as its missing", printLogs, "error")
