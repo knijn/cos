@@ -32,8 +32,10 @@ if config.settings then
 end
 fs.makeDir("/cos/lib")
 fs.makeDir("/cos/programs/ccsmb10")
+fs.makeDir("/cos/userdata")
 settings.set("path.programs", "/cos/programs/ccsmb10")
 settings.set("path.libraries", "/cos/lib")
+settings.set("path.data","/cos/userdata")
 settings.set("shell.path", settings.get("shell.path") .. ":/cos/programs/ccsmb10")
 settings.set("shell.package_path", settings.get("shell.package_path") .. ";/cos/lib/?;/cos/lib/?.lua")
 settings.save()
