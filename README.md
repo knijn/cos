@@ -10,6 +10,8 @@ Any package that isn't configured won't be enabled (unless another package relie
 - .settings file definition from /cos/config.lua
 - Easy simple background runners using redrun
 - Easily expandable
+
+## Example configuration
 Here's an example /cos/config.lua file
 ```lua
 return {
@@ -30,6 +32,7 @@ return {
 As the packages system is completely modular, anything can be done on startup. The intended way to use the packages system is to use a package as an installer for a package, not as the actual code of the package itself. 
 This practice is ignored by the system utilities in order to bundle system utilities with the OS itself.
 Here's the folder structure:
+## File structure
 ```
 .
 ├── cos
