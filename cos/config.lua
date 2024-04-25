@@ -1,7 +1,7 @@
 return {
     silent_startup = false,
     packages = {
-        syslog = {
+        cos_syslog = {
             path = ".syslog",
             daemon = true
         },
