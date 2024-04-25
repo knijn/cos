@@ -31,7 +31,6 @@ return {
 }
 ```
 
-Here's the folder structure:
 ## File structure
 ```
 .
@@ -41,11 +40,13 @@ Here's the folder structure:
 │   ├── packages (the package definition files itself)
 │   │   ├── cos_daemon.lua
 │   │   ├── redrun.lua
-│   │   └── syslog.lua
+│   │   ├── syslog.lua
+│   │   └── ...
 │   └── programs (folder which holds the programs that a package installs)
-│       └── syslog (a package puts this folder into the path to enable itself)
-│           └── syslog.lua
-└── startup.lua (program that runs hook.lua)
+│       ├── syslog (a package puts this folder into the path to enable itself
+|       |   └── syslog.lua
+│       └── ... 
+└── startup.lua (program that runs hook.lua that does all the magic)
 ```
 
 ## List of packages and their respective configuration options
