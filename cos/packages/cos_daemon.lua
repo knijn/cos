@@ -24,7 +24,7 @@ daemon.startup = function()
                             package.cleanup()
                             _G.cos_installed_packages[package] = nil
                         else
-                            log("Package " .. packageName .. " has no cleanup function and couldn't be cleaned up", false, "error")
+                            log("Package " .. packageName .. " has no cleanup function and couldn't be cleaned up", arg1, "error")
                         end
                     end
                 end
