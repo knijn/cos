@@ -10,6 +10,7 @@ _G.log = function(message, printed)
       print(message)
     end
 end
+log("Basic log() overwrite done", true)
 
 _G.cos_loaded_packages = {}
 _G.cos_packages_config = {}
