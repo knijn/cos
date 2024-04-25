@@ -26,4 +26,6 @@ if not checkAlive() then error("daemon isn't alive",0) end
 
 if args[1] == "clear" then
     os.queueEvent("syslog_daemon", "clearLog")
+elseif args[1] == "view" then
+    shell.run("edit " .. _G.cos_packages_config.cos_syslog.path)
 end
