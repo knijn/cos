@@ -40,6 +40,7 @@ return {
 ├── cos
 │   ├── config.lua (the main configuration file)
 │   ├── hook.lua (the file that gets ran on startup)
+│   ├── lib (libraries are stored here)   
 │   ├── packages (the package definition files itself)
 │   │   ├── cos_daemon.lua
 │   │   ├── redrun.lua
