@@ -66,6 +66,7 @@ for i=1,4 do
         log("loading " .. packageName .. " with priority " .. priority, printLogs)
         -- Let the package handle anything it needs to on every startup
         
+        local errorObject = nil
         _G.cos_packages_config[packageName] = config.packages[packageName]
         _G.cos_loaded_packages[packageName], errorObject = pcall(package.startup,config.packages[packageName])
         if not _G.cos_loaded_packages[packageName] then
