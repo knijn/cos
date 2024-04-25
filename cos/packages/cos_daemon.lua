@@ -13,6 +13,8 @@ daemon.startup = function()
             local event, command, arg1, arg2 = os.pullEvent("cos_daemon")
             if command == "listActive" then 
                 os.queueEvent("cos_daemon_response",  _G.cos_loaded_packages)
+            elseif command == "ping" then
+                os.queueEvent("cos_daemon_response")
             elseif command == "cleanup" then
                 if not arg1 then arg1 = false end -- disable printing if not specified
                 for packageName,o in pairs(_G.cos_installed_packages) do
