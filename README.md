@@ -76,6 +76,5 @@ _G.cos_packages_config.syslog = {
 ## Roadmap
 The following things are planned, but not implemented yet:
 - firstrun hook for packages
-- .settings config support inside the /cos/config.lua file (/.settings will be derived from /cos/config.lua for backwards compatibility)
 - CCSMB-10 compliance
 - CCSMB-9 compliance, whenever passed
