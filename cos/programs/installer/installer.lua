@@ -108,7 +108,8 @@ elseif args[1] == "build" then
     archive.files = {}
 
     for i,file in pairs(fileListing) do
-        local h = fs.open(file,"r")
+        local h, err = fs.open(file,"r")
+        if not h then error(err) end
         local fileContents = h.readAll()
         h.close()
         print(" + " .. file)
