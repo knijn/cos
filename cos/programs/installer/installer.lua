@@ -121,7 +121,7 @@ elseif args[1] == "build" then
     end
 
     -- open the default config
-    local h = fs.open("/cos/installer/data/defaultconfig.lua","r")
+    local h = fs.open("/cos/programs/installer/data/defaultconfig.lua","r")
     local defaultConfig = h.readAll()
     h.close()
     archive.files["/cos/config.lua"] = defaultConfig
