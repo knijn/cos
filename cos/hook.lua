@@ -45,8 +45,11 @@ if config.packages then
                     log("!! " .. packageName .. " - not queued as its missing", printLogs)
                 end
             end
-        elseif package then
-          
+          elseif package then
+            log("queued " .. packageName .. " ", printLogs)
+            -- Queue the package to load
+              toLoad[packageName] = 1
+          end
         else
           log("!! " .. packageName .. " - not queued as its missing", printLogs)
         end
