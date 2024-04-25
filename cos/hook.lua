@@ -68,6 +68,25 @@ if config.packages then
         end
     end
 end
+
+for i=1,5 do -- do a scan for packages that depend on other packages
+  log("scanning for deep subdependencies, iteration " .. i, printLogs)
+  for packageName,priority in pairs(toLoad) do
+      local package = require("/cos/packages/" .. packageName)
+      if package and package.metadata then
+        local dependencies = package.metadata.dependencies
+        for i,dependency in pairs(dependencies) do
+          if not toLoad[dependency] then
+            toLoad[dependency] = 2
+            log("queued " .. packageName .. " as a subdependency", printLogs)
+          end
+        end
+      end
+  end
+
+  
+end
+
 for i=1,4 do
   targetPriority = 4 - i
 
