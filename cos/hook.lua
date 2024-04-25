@@ -29,6 +29,9 @@ if config.settings then
   end
   settings.save()
 end
+fs.makeDir("/cos/lib")
+settings.set("shell.package_path", settings.get("shell.package_path") .. ";/cos/lib/?;/cos/lib/?.lua")
+settings.save()
 
 log("Base cOS initialization done.", printLogs)
 log("Loading packages...", printLogs)
