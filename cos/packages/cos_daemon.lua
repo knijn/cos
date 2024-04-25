@@ -26,8 +26,6 @@ daemon.startup = function()
                         else
                             log("Package " .. packageName .. " has no cleanup function and couldn't be cleaned up", false, "error")
                         end
-                        
-                        
                     end
                 end
             end
