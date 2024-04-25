@@ -71,6 +71,19 @@ return {
         },
         cos_daemon = {},
         cos_ls = {} -- Currently broken when running `ls`
+        installer = { -- this is the installer configuration used to build cos
+            directories = {
+                "/cos/programs/",
+                "/cos/packages/"
+            },
+            files = {
+                "/cos/hook.lua",
+                "/startup.lua"
+            },
+            ignore = {
+                "/cos/programs/ccsmb10"
+            }
+        },
     }
 }
 ```
