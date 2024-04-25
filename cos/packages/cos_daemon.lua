@@ -28,6 +28,7 @@ daemon.startup = function()
                         end
                     end
                 end
+                os.queueEvent("cos_daemon_response","cleanup","done")
             end
         end
     end, "cos_daemon")
