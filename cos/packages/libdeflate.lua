@@ -19,4 +19,10 @@ libdeflate.startup = function()
 
     return true
 end
+
+libdeflate.cleanup = function()
+    fs.delete("/cos/lib/LibDeflate.lua")
+    return true
+end
+
 return libdeflate
