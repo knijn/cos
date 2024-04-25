@@ -14,16 +14,13 @@ This practice is ignored by the system utilities in order to bundle system utili
 - Easily expandable
 
 ## Example configuration
-Here's an example /cos/config.lua file
+Here's the example /cos/config.lua file
 ```lua
 return {
     silent_startup = false,
-    settings = {
-        ["path.programs"] = "/cos/programs/ccsmb10"
-    },
     packages = {
-        syslog = {
-            path = ".syslog",
+        cos_syslog = {
+            path = "/.syslog",
             daemon = true
         },
         cos_daemon = {}
