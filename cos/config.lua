@@ -5,7 +5,7 @@ return {
     },
     packages = {
         cos_syslog = {
-            path = ".syslog",
+            path = "/.syslog",
             daemon = true
         },
         cos_daemon = {},
