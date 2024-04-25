@@ -30,7 +30,7 @@ if config.settings then
   settings.save()
 end
 
-log("Basic cOS initialisation done.", printLogs)
+log("Base cOS initialization done.", printLogs)
 log("Loading packages...", printLogs)
 --log(" ", printLogs)
 --log(" ", printLogs)
