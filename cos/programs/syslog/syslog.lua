@@ -20,8 +20,6 @@ local function checkAlive()
     return alive
 end
 
-
-
 if not checkAlive() then error("syslog daemon isn't alive",0) end
 
 if args[1] == "clear" then
