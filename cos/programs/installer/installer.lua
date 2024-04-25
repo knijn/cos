@@ -55,7 +55,7 @@ elseif args[1] == "build" then
     local directoryListing = {}
 
     local archive = {}
-
+    -- this is going to get me put on a hitlist
     for i,directory in pairs(directoriesConfig) do
         local subdirectories = fs.list(directory)
         table.insert(directoryListing,directory)
