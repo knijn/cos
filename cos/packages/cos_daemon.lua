@@ -7,7 +7,7 @@ daemon.metadata = {
 }
 
 daemon.startup = function()
-    shell.setPath(shell.path() .. ":/cos/programs/cos/cos_daemon")
+    shell.setPath(shell.path() .. ":/cos/programs/cos_daemon")
     _G.cos_packages.redrun.start(function() 
         while true do
             local event, command, arg1, arg2 = os.pullEvent("cos_daemon")
