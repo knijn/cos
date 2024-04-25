@@ -13,6 +13,12 @@ This practice is ignored by the system utilities in order to bundle system utili
 - Easy simple background runners using redrun
 - Easily expandable
 
+## Installation
+Run the following command to install the latest build
+```
+wget run https://raw.githubusercontent.com/knijn/cos/main/cos/programs/installer/installer.lua install
+```
+
 ## Example configuration
 Here's the example /cos/config.lua file
 ```lua
