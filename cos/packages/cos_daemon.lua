@@ -7,6 +7,7 @@ daemon.metadata = {
 }
 
 daemon.startup = function()
+    shell.setPath(shell.path() .. ":/cos/programs/cos/cos_daemon")
     _G.cos_packages.redrun.start(function() 
         local event, command, arg1, arg2 = os.pullEvent("cos_daemon")
         if command == "listActive" then 
