@@ -44,7 +44,10 @@ log("Loading packages...", printLogs)
 if config.packages then
     for packageName,o in pairs(config.packages) do
       if fs.exists("/cos/packages/" .. packageName .. ".lua") then
-        local package = require("/cos/packages/" .. packageName)
+        local package, err = require("/cos/packages/" .. packageName)
+        if package == true then
+          log("The package " .. packageName .." was misconfigured")
+        end
         if package and package.metadata then
             log("queued " .. packageName .. " ", printLogs)
             -- Queue the package to load
