@@ -106,6 +106,13 @@ elseif args[1] == "build" then
         table.insert(archive.directories,directory)
     end
 
+    -- open the default config
+    local h = fs.open("/cos/installer/data/defaultconfig.lua","r")
+    local defaultConfig = h.readAll()
+    h.close()
+    archive.files["/cos/config.lua"] = defaultConfig
+    print("Inserted default config")
+
     local h = fs.open("/cos-build","w")
     h.write(textutils.serialize(archive))
     h.close()
