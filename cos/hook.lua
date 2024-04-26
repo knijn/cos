@@ -1,7 +1,7 @@
 local config = require("/cos/config")
 if not config then error("No config file or not valid") end
 
-_G.cos_packages = {}
+
 -- let packages inject stuff into _G.cos_packages in order to make them available system wide if its a library
 
 -- default fallback log function if the syslog package is not loaded
@@ -14,6 +14,7 @@ log("Basic log() overwrite done", true)
 
 _G.cos_loaded_packages = {}
 _G.cos_packages_config = {}
+_G.cos_packages = {}
 _G.cos_installed_packages = settings.get("cos.installed_packages",{})
 -- initial scan to build list of packages to load
 local toLoad = {}
