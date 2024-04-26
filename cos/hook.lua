@@ -44,6 +44,11 @@ shell.setPath(shell.path() .. ":/cos/programs/ccsmb10")
 settings.set("shell.package_path", settings.get("shell.package_path") .. ";/cos/lib/?;/cos/lib/?.lua")
 settings.save()
 
+log("Loading syslog now...", printLogs)
+require("/cos/packages/redrun").startup(config.packages.redrun)
+require("/cos/packages/cos_syslog").startup(config.packages.cos_syslog)
+log("Syslog loaded..")
+
 log("Base cOS initialization done.", printLogs)
 log("Loading packages...", printLogs)
 --log(" ", printLogs)
@@ -52,7 +57,7 @@ log("Loading packages...", printLogs)
 
 if config.packages then
     for packageName,o in pairs(config.packages) do
-      if fs.exists("/cos/packages/" .. packageName .. ".lua") then
+      if fs.exists("/cos/packages/" .. packageName .. ".lua") and packageName ~= "cos_syslog"  or packageName ~= "redrun" then
         local package, err = require("/cos/packages/" .. packageName)
         if package == true then
           log("The package " .. packageName .." was misconfigured")
@@ -85,7 +90,7 @@ for i=1,5 do -- do a scan for packages that depend on other packages
   log("scanning for deep subdependencies, iteration " .. i, printLogs)
   for packageName,priority in pairs(toLoad) do
       local package = require("/cos/packages/" .. packageName)
-      if package and package.metadata then
+      if package and package.metadata and packageName ~= "cos_syslog"  or packageName ~= "redrun" then
         local dependencies = package.metadata.dependencies
         for i,dependency in pairs(dependencies) do
           if not toLoad[dependency] then
@@ -105,7 +110,7 @@ for i=1,4 do
   for packageName,priority in pairs(toLoad) do
     if (priority == targetPriority and not _G.cos_loaded_packages[packageName]) or (targetPriority == 0 and not _G.cos_loaded_packages[packageName]) then -- this will re-attempt to load it if it failed the first time in a higher priority
       local package = require("/cos/packages/" .. packageName)
-      if package then
+      if package and (packageName ~= "cos_syslog" or packageName ~= "redrun") then
         log("loading " .. packageName .. " with priority " .. priority, printLogs)
         -- Let the package handle anything it needs to on every startup
         
