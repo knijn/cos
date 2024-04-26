@@ -49,4 +49,12 @@ syslog.startup = function(config)
     return true
 end
 
+syslog.update = function()
+    return true
+end
+
+syslog.cleanup = function()
+    return true
+end
+
 return syslog

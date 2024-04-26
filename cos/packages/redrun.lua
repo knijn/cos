@@ -114,4 +114,13 @@ redrun.startup = function(config)
     return true
 end
 
+redrun.update = function ()
+    return true
+end
+
+redrun.cleanup = function ()
+    _G.cos_packages.redrun = nil
+    return true
+end
+
 return redrun

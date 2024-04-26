@@ -39,4 +39,12 @@ daemon.startup = function()
     return true
 end
 
+daemon.update = function()
+    return true
+end
+
+daemon.cleanup = function()
+    return true
+end
+
 return daemon

@@ -12,4 +12,12 @@ installer.startup = function()
     return true
 end
 
+installer.update = function()
+    return true
+end
+
+installer.cleanup = function()
+    return true
+end
+
 return installer

@@ -26,4 +26,16 @@ libdeflate.cleanup = function()
     return true
 end
 
+libdeflate.update = function()
+    local hweb, err = http.get("https://raw.githubusercontent.com/MCJack123/CC-Archive/master/LibDeflate.lua")
+    if not hweb then
+        log("Failed to download LibDeflate.lua: " .. err, false, "error")
+        error("Failed to download LibDeflate.lua: " .. err)
+    end
+    local hfile = fs.open("/cos/lib/LibDeflate.lua", "w")
+    hfile.write(hweb.readAll())
+    hfile.close()
+    hweb.close()
+end
+
 return libdeflate
