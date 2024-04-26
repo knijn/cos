@@ -1,6 +1,5 @@
 local args = {...}
-if args[1] == "install" then
-    -- data[1].assets[1].browser_download_url
+local function downloadLatestBuild()
     local apiURL = "http://api.github.com/repos/knijn/cos/releases"
     local baseRepoURL = "https://github.com/knijn/cos"
     local scKey = _G._GIT_API_KEY
@@ -14,9 +13,13 @@ if args[1] == "install" then
       http.request(apiURL) -- when not on switchcraft, use no authentication
     end
     print("Made request to " .. apiURL)
+end
 
+if args[1] == "install" then
+    -- data[1].assets[1].browser_download_url
+    downloadLatestBuild()
     while true do
-        event, url, handle = os.pullEvent()
+        local event, url, handle = os.pullEvent()
         if event == "http_failure" then
             error("Failed to download file: " .. handle)
         elseif event == "http_success" then
@@ -38,6 +41,34 @@ if args[1] == "install" then
                 print(" + " .. file)
             end
             print("cOS has been installed, please reboot!")
+            return
+        end
+    end
+elseif args[1] == "update" then
+    downloadLatestBuild()
+    while true do
+        local event, url, handle = os.pullEvent()
+        if event == "http_failure" then
+            error("Failed to download file: " .. handle)
+        elseif event == "http_success" then
+            local data = textutils.unserialiseJSON(handle.readAll())
+            local url = data[1].assets[1].browser_download_url
+            local h = http.get(url)
+            local buildData = textutils.unserialise(h.readAll()) -- load all the of the OS in RAM, this might be bad later
+            h.close()
+            
+            for i,o in pairs(buildData.directories) do
+                print("d+ " .. o)
+                fs.makeDir(o)
+            end
+
+            for file,fileData in pairs(buildData.files) do
+                local h = fs.open(file,"w")
+                h.write(fileData)
+                h.close()
+                print(" + " .. file)
+            end
+            print("cOS has been updated, please reboot!")
             return
         end
     end
@@ -66,7 +97,7 @@ elseif args[1] == "build" then
     end
 
     print("Queuing files to be packaged")
-    
+
     for i, directory in pairs(directoriesConfig) do
         packageDir(directory)
     end
