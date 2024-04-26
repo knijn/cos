@@ -17,6 +17,8 @@ _G.cos_packages_config = {}
 _G.cos_packages = {}
 _G.cos_version = "0.2.0"
 _G.cos_installed_packages = settings.get("cos.installed_packages",{})
+
+
 -- initial scan to build list of packages to load
 local toLoad = {}
 local printLogs = true
