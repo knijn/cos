@@ -34,8 +34,14 @@ syslog.startup = function(config)
     _G.log = function(message,printed,level)
         local preText = ""
         if level == "error" then
-            preText = "[ERROR] "
+            preText = preText .. "[ERROR] "
+        elseif level == "warn" then
+            preText = preText .. "[WARN ] "
+        elseif not level then
+            preText = preText .. "[INFO ] "
         end
+        preText = preText .. os.date("%T %D") .. " (" .. fs.getName(shell.getRunningProgram()) .. ") "
+        
         if printed then        
             local oldTermColor = term.getTextColor()
             
