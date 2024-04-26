@@ -1,7 +1,7 @@
 local args = {...}
 
 local function help()
-    print("Synopsis\nsyslog [OPTIONS]\n\nDescription\nview\n    opens the log file for viewing\nclear\n     clears the log file\nlistError\n      lists all errors in the log file")
+    print("Synopsis\nsyslog [OPTIONS]\n\nDescription\nview\n    opens the log file for viewing\nclear\n     clears the log file\nerrors\n      lists all errors in the log file")
 end
 
 if not args[1] then
@@ -23,13 +23,14 @@ local function checkAlive()
     return alive
 end
 
-if not checkAlive() then error("syslog daemon isn't alive",0) end
+--if not checkAlive() then error("syslog daemon isn't alive",0) end
 
 if args[1] == "clear" then
-    os.queueEvent("syslog_daemon", "clearLog")
+    local file = fs.open(_G.cos_packages_config["cos_syslog"].logPath, "w")
+    file.close()
 elseif args[1] == "view" then
     shell.run("edit " .. _G.cos_packages_config.cos_syslog.path)
-elseif args[1] == "listError" then
+elseif args[1] == "errors" then
     local h = fs.open(_G.cos_packages_config.cos_syslog.path,"r")
     local contents = h.readAll()
     h.close()
