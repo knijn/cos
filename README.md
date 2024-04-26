@@ -57,7 +57,7 @@ return {
 └── startup.lua (program that runs hook.lua that does all the magic)
 ```
 
-## List of packages and their respective configuration options
+## List of all configuration options
 ```lua
 return {
     silent_startup = false,
