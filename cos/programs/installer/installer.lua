@@ -1,5 +1,5 @@
 local args = {...}
-local versionAPI = require("version")
+
 
 local function downloadLatestBuild()
     local apiURL = "http://api.github.com/repos/knijn/cos/releases"
@@ -20,6 +20,7 @@ end
 if args[1] == "install" then
     -- data[1].assets[1].browser_download_url
     downloadLatestBuild()
+    
     while true do
         local event, url, handle = os.pullEvent()
         if event == "http_failure" then
@@ -48,6 +49,7 @@ if args[1] == "install" then
     end
 elseif args[1] == "update" then
     downloadLatestBuild()
+    local versionAPI = require("version")
     while true do
         local event, url, handle = os.pullEvent()
         if event == "http_failure" then
