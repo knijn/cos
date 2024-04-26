@@ -25,8 +25,42 @@ local printLogs = true
 if config.silent_startup then
   printLogs = false
 end
+if config.pretty_boot then
+  printLogs = false
+end
 term.clear()
 term.setCursorPos(1,1)
+
+local function setBootDots(amt)
+  if not config.pretty_boot then
+    return
+  end
+  local xSize, ySize = term.getSize()
+  local dot = "\7 "
+  term.setCursorPos(math.ceil(xSize/2) - 9 / 2, math.ceil(ySize/2)+2)
+  for i=1,5 do
+    if amt >= i then
+      term.setTextColor(config.theme.secondary_color or colors.lightBlue)
+    else
+      term.setTextColor(colors.gray)
+    end
+    term.write(dot)
+  end
+  term.setTextColor(config.theme.text_color)
+end
+
+if config.pretty_boot then
+  local xSize, ySize = term.getSize()
+  local text = "cOS "
+  term.setCursorPos(math.ceil(xSize/2) - #text / 2, math.ceil(ySize/2))
+  term.setTextColor(config.theme.primary_color or colors.blue)
+  term.write(text)
+  setBootDots(1)
+  term.setCursorPos(1,ySize)
+  term.setTextColor(colors.gray)
+  term.write("v" .. _G.cos_version)
+end
+
 log("Setting .settings values...", printLogs)
 if config.settings then
   for k,v in pairs(config.settings) do
@@ -54,7 +88,7 @@ log("Loading packages...", printLogs)
 --log(" ", printLogs)
 --log(" ", printLogs)
 
-
+setBootDots(2)
 if config.packages then
     for packageName,o in pairs(config.packages) do
       if fs.exists("/cos/packages/" .. packageName .. ".lua") and packageName ~= "cos_syslog"  or packageName ~= "redrun" then
@@ -103,7 +137,7 @@ for i=1,5 do -- do a scan for packages that depend on other packages
 
   
 end
-
+setBootDots(3)
 for i=1,4 do
   targetPriority = 4 - i
 
@@ -139,3 +173,15 @@ end
 
 settings.set("cos.installed_packages",_G.cos_installed_packages)
 settings.save()
+setBootDots(5)
+log("cOS started", printLogs)
+if config.pretty_boot then
+  local waitTime = config.pretty_boot_time or 2
+  sleep(waitTime)
+  term.clear()
+  term.setCursorPos(1,1)
+  term.setTextColor(colors.yellow)
+  term.write("cOS " .. _G.cos_version)
+  term.setTextColor(colors.white)
+  term.setCursorPos(1,2)
+end
