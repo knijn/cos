@@ -66,6 +66,7 @@ elseif args[1] == "build" then
     end
 
     print("Queuing files to be packaged")
+    
     for i, directory in pairs(directoriesConfig) do
         packageDir(directory)
     end
