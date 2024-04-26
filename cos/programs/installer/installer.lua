@@ -89,7 +89,22 @@ elseif args[1] == "update" then
                 end
             end
 
-            if (newBuildVersion.minor > currentVersion.minor) and newBuildVersion.major == currentVersion.major or (newBuildVersion.patch > currentVersion.patch) and newBuildVersion.major == currentVersion.major and newBuildVersion.minor == currentVersion.minor then
+            if (newBuildVersion.major > currentVersion.major) or (newBuildVersion.minor > currentVersion.minor) and newBuildVersion.major == currentVersion.major or (newBuildVersion.patch > currentVersion.patch) and newBuildVersion.major == currentVersion.major and newBuildVersion.minor == currentVersion.minor then
+                if newBuildVersion.major > currentVersion.major then
+                    print("Major update available, are you sure you want to continue?")
+                    print("This will update the core system and all packages")
+                    print("y/n")
+                    local entry = string.lower(read())
+                    if entry == "y" then
+                        updateOS()
+                        updatePackages()
+                        return
+                    else
+                        print("Update cancelled")
+                        return
+                    end
+                end
+
                 print("New version available!")
                 print("Would you like to update the core system and package store? (y/n) ")
                 local entry = string.lower(read())
