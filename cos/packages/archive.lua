@@ -32,8 +32,7 @@ archive.update = function()
 end
 
 archive.cleanup = function()
-    fs.delete("/cos/lib/archive.lua")
-    return true
+    return pcall(function() fs.delete("/cos/lib/archive.lua") end)
 end
 
 
