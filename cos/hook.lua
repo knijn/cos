@@ -15,7 +15,7 @@ log("Basic log() overwrite done", true)
 _G.cos_loaded_packages = {}
 _G.cos_packages_config = {}
 _G.cos_packages = {}
-_G.cos_version = "0.2.0"
+_G.cos_version = "0.3.0"
 _G.cos_installed_packages = settings.get("cos.installed_packages",{})
 
 
