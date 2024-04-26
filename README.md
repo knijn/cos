@@ -72,11 +72,17 @@ return {
         ["path.programs"] = "/cos/programs/ccsmb10"
     },
     packages = {
+        archive = {},
         cos_syslog = {
             path = ".syslog",
             daemon = true
         },
         cos_daemon = {},
+        gist = {},
+        libdeflate = {},
+        sha1 = {},
+        sha256 = {},
+        version = {},
         cos_ls = {} -- Currently broken when running `ls`
         installer = { -- this is the installer configuration used to build cos
             directories = {
