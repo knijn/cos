@@ -1,4 +1,6 @@
 local args = {...}
+local versionAPI = require("version")
+
 local function downloadLatestBuild()
     local apiURL = "http://api.github.com/repos/knijn/cos/releases"
     local baseRepoURL = "https://github.com/knijn/cos"
@@ -57,18 +59,35 @@ elseif args[1] == "update" then
             local buildData = textutils.unserialise(h.readAll()) -- load all the of the OS in RAM, this might be bad later
             h.close()
             
-            for i,o in pairs(buildData.directories) do
-                print("d+ " .. o)
-                fs.makeDir(o)
+            local newBuildVersion = versionAPI.parse_version(buildData.version)
+            local currentVersion = versionAPI.parse_version(_G.cos_version)
+            print("Current version: " .. _G.cos_version)
+            print("New version: " .. buildData.version)
+            if (newBuildVersion.minor > currentVersion.minor) and newBuildVersion.major == currentVersion.major or (newBuildVersion.patch > currentVersion.patch) and newBuildVersion.major == currentVersion.major and newBuildVersion.minor == currentVersion.minor then
+                print("New version available!")
+                print("Would you like to update? (y/n) ")
+                local entry = string.lower(read())
+                if entry ~= "y" then
+                    print("Update cancelled")
+                    return
+                end
+                
+                for i,o in pairs(buildData.directories) do
+                    print("d+ " .. o)
+                    fs.makeDir(o)
+                end
+                for file,fileData in pairs(buildData.files) do
+                    local h = fs.open(file,"w")
+                    h.write(fileData)
+                    h.close()
+                    print(" + " .. file)
+                end
+                print("cOS has been updated, please reboot!")
+            else
+                print("No new version available")
             end
 
-            for file,fileData in pairs(buildData.files) do
-                local h = fs.open(file,"w")
-                h.write(fileData)
-                h.close()
-                print(" + " .. file)
-            end
-            print("cOS has been updated, please reboot!")
+            
             return
         end
     end
