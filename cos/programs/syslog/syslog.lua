@@ -1,8 +1,11 @@
 local args = {...}
 
+local function help()
+    print("Synopsis\nsyslog [OPTIONS]\n\nDescription\nview\n    opens the log file for viewing\nclear\n     clears the log file\nlistError\n      lists all errors in the log file")
+end
+
 if not args[1] then
-    print("syslog help:")
-    print("clear - clears the log file")
+    help()
 end
 
 local function checkAlive()
@@ -26,4 +29,14 @@ if args[1] == "clear" then
     os.queueEvent("syslog_daemon", "clearLog")
 elseif args[1] == "view" then
     shell.run("edit " .. _G.cos_packages_config.cos_syslog.path)
+elseif args[1] == "listError" then
+    local h = fs.open(_G.cos_packages_config.cos_syslog.path,"r")
+    local contents = h.readAll()
+    h.close()
+    for s in contents:gmatch("[^\n]+") do
+        --print(s)
+        if string.match(s, "[ERROR]") then
+            print(s)
+        end
+    end
 end

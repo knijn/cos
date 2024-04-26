@@ -17,8 +17,13 @@ syslog.startup = function(config)
     _G.cos_packages_config["cos_syslog"].logPath = logPath
     -- This is probably a sin but whatever
     _G.log = function(message,printed,level)
+        local preText = ""
+        if level == "error" then
+            preText = "[ERROR] "
+        end
         if printed then        
             local oldTermColor = term.getTextColor()
+            
             if level == "error" then
                 term.setTextColor(colors.red)
             end
@@ -27,7 +32,7 @@ syslog.startup = function(config)
         end
         
         local file = fs.open(logPath, "a")
-        file.write(message .. "\n")
+        file.write(preText .. message .. "\n")
         file.close()
     end
     
