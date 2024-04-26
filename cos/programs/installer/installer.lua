@@ -63,15 +63,8 @@ elseif args[1] == "update" then
             local currentVersion = versionAPI.parse_version(_G.cos_version)
             print("Current version: " .. _G.cos_version)
             print("New version: " .. buildData.version)
-            if (newBuildVersion.minor > currentVersion.minor) and newBuildVersion.major == currentVersion.major or (newBuildVersion.patch > currentVersion.patch) and newBuildVersion.major == currentVersion.major and newBuildVersion.minor == currentVersion.minor then
-                print("New version available!")
-                print("Would you like to update? (y/n) ")
-                local entry = string.lower(read())
-                if entry ~= "y" then
-                    print("Update cancelled")
-                    return
-                end
-                
+            
+            local function updateOS()
                 for i,o in pairs(buildData.directories) do
                     print("d+ " .. o)
                     fs.makeDir(o)
@@ -82,11 +75,40 @@ elseif args[1] == "update" then
                     h.close()
                     print(" + " .. file)
                 end
-                print("cOS has been updated, please reboot!")
-            else
-                print("No new version available")
+                print("Core system updated")
             end
 
+            local function updatePackages()
+                for i,o in pairs(_G.cos_loaded_packages) do
+                    local package = require("/cos/packages/" .. o)
+                    if package.update then
+                        package.update()
+                    else
+                        log("Package " .. o .. " has no update function", true, "error")
+                    end
+                end
+            end
+
+            if (newBuildVersion.minor > currentVersion.minor) and newBuildVersion.major == currentVersion.major or (newBuildVersion.patch > currentVersion.patch) and newBuildVersion.major == currentVersion.major and newBuildVersion.minor == currentVersion.minor then
+                print("New version available!")
+                print("Would you like to update the core system and package store? (y/n) ")
+                local entry = string.lower(read())
+                if entry == "y" then
+                    updateOS()
+                else
+                    print("Core system not updated")
+                end
+                print("Would you like to update the packages? (y/n) ")
+                local entry = string.lower(read())
+                if entry == "y" then
+                    updatePackages()
+                else
+                    print("Packages not updated")
+                end    
+            else
+                print("No new system version available")
+            end
+            
             
             return
         end
