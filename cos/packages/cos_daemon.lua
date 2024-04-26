@@ -20,15 +20,22 @@ daemon.startup = function()
                 log("Received cleanup command", arg1)
                 for packageName,o in pairs(_G.cos_installed_packages) do
                     if not _G.cos_loaded_packages[packageName] then
-                        local package = require("/cos/packages/" .. packageName)
-                        if package.cleanup then
-                            log("Cleaning up package " .. packageName, arg1)
-                            package.cleanup()
-                            _G.cos_installed_packages[package] = nil
+                        if not fs.exists("/cos/packages/" .. packageName .. ".lua") then
+                            log("Package " .. packageName .. " doesn't exist, cleaning up", arg1)
+                            _G.cos_installed_packages[packageName] = nil
                             settings.set("cos.installed_packages", _G.cos_installed_packages)
                             settings.save()
                         else
-                            log("Package " .. packageName .. " has no cleanup function and couldn't be cleaned up", arg1, "error")
+                            local package = require("/cos/packages/" .. packageName) or nil
+                            if package and package.cleanup then
+                                log("Cleaning up package " .. packageName, arg1)
+                                package.cleanup()
+                                _G.cos_installed_packages[packageName] = nil
+                                settings.set("cos.installed_packages", _G.cos_installed_packages)
+                                settings.save()
+                            else
+                                log("Package " .. packageName .. " has no cleanup function and couldn't be cleaned up", arg1, "error")
+                            end
                         end
                     end
                 end
