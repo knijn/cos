@@ -1,5 +1,12 @@
 return {
     silent_startup = false,
+    pretty_boot = true,
+    pretty_boot_time = 1,
+    theme = {
+        primary_color = colors.blue,
+        secondary_color = colors.lightBlue,
+        text_color = colors.white
+    },
     settings = {
         ["path.programs"] = "/cos/programs/ccsmb10"
     },

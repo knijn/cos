@@ -61,6 +61,13 @@ return {
 ```lua
 return {
     silent_startup = false,
+    pretty_boot = true, -- wether to show the pretty boot screen during bootup
+    pretty_boot_time = 2, -- an amount of time to add to wait until continuing. this is to make the actual screen visible
+    theme = {
+        primary_color = colors.blue,
+        secondary_color = colors.lightBlue,
+        text_color = colors.white
+    },
     settings = {
         ["path.programs"] = "/cos/programs/ccsmb10"
     },
