@@ -127,6 +127,8 @@ elseif args[1] == "build" then
     archive.files["/cos/config.lua"] = defaultConfig
     print("Inserted default config")
 
+    archive.version = _G.cos_version
+
     local h = fs.open("/cos-build","w")
     h.write(textutils.serialize(archive))
     h.close()
