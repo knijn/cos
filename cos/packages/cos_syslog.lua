@@ -14,8 +14,23 @@ syslog.startup = function(config)
     else
         logPath = config.path
     end
+    _G.cos_packages_config["cos_syslog"] = {}
     _G.cos_packages_config["cos_syslog"].logPath = logPath
     -- This is probably a sin but whatever
+
+    local originalError = _G.error
+    _G.error = function(message, level)
+        local printed = false
+        --print("error called")
+        --print(shell.getRunningProgram(),string.match(shell.getRunningProgram(), "cos/packages"))
+        if string.match(shell.getRunningProgram(), "cos/packages") then
+            _G.nativeTerm.write("Error happened in daemon, printing to console")
+            _G.nativeTerm.write(message)
+            printed = true
+        end
+        _G.log(message, printed, "error") -- the originalError function is handling the printing
+        originalError(message, level)
+    end
     _G.log = function(message,printed,level)
         local preText = ""
         if level == "error" then
