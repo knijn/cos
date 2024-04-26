@@ -75,7 +75,7 @@ settings.set("path.programs", "/cos/programs/ccsmb10")
 settings.set("path.libraries", "/cos/lib")
 settings.set("path.data","/cos/userdata")
 shell.setPath(shell.path() .. ":/cos/programs/ccsmb10")
-settings.set("shell.package_path", settings.get("shell.package_path") .. ";/cos/lib/?;/cos/lib/?.lua")
+settings.set("shell.package_path", settings.get("shell.package_path","") .. ";/cos/lib/?;/cos/lib/?.lua")
 settings.save()
 _G.nativeTerm = term.current()
 
