@@ -73,7 +73,6 @@ syslog.startup = function(config)
             end
         end, "syslog_daemon")
     end
-
     return true
 end
 
