@@ -56,15 +56,17 @@ syslog.startup = function(config)
         file.write(preText .. message .. "\n")
         file.close()
     end
-    
+    local log = _G.log
+    local error = _G.error
     if config.daemon then
         shell.setPath(shell.path() .. ":/cos/programs/syslog")
         _G.cos_packages.redrun.start(function() -- start the background daemon
+            --log("syslog daemon started")
             while true do
               local event, command, arg1, arg2 = os.pullEvent("syslog_daemon")
               if command == "clearLog" then
-                  local file = fs.open(logPath, "w")
-                  file.close()
+                log("clearing log file",true)  
+                
               elseif command == "ping" then
                   os.queueEvent("syslog_daemon_response")
               end
