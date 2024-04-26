@@ -11,8 +11,8 @@ return {
         cos_daemon = {},
         installer = {
             directories = {
-                "/cos/programs/",
-                "/cos/packages/"
+                "/cos/programs",
+                "/cos/packages"
             },
             files = {
                 "/cos/hook.lua",

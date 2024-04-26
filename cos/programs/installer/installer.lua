@@ -50,37 +50,26 @@ elseif args[1] == "build" then
     local directoryListing = {}
 
     local archive = {}
-    -- this is going to get me put on a hitlist
-    for i,directory in pairs(directoriesConfig) do
-        local subdirectories = fs.list(directory)
-        table.insert(directoryListing,directory)
-        for i,subdirectory in pairs(subdirectories) do
-            --print(directory .. subdirectory)
-            if fs.isDir(directory .. subdirectory) then
-                table.insert(directoryListing,directory .. subdirectory)
-                local subsubdirectories = fs.list(directory .. subdirectory)
-                
-                for i,subsubdirectory in pairs(subsubdirectories) do
-                    if fs.isDir(directory .. subdirectory .. "/" .. subsubdirectory .. "/") then
-                        table.insert(directoryListing,directory .. subdirectory  .. "/".. subsubdirectory)
-                        for i,subsubsubdirectory in pairs(fs.list(directory .. subdirectory .. "/" .. subsubdirectory .. "/")) do
-                            if fs.isDir(directory .. subdirectory .. "/" .. subsubdirectory .. "/" .. subsubsubdirectory) then
-                                table.insert(directoryListing,directory .. subdirectory  .. "/".. subsubdirectory .. "/" .. subsubsubdirectory)
-                            else
-                                table.insert(fileListing,directory .. subdirectory  .. "/".. subsubdirectory .. "/" .. subsubsubdirectory)
-                            end
-                            -- this is hell
-                        end
-                    else
-                      table.insert(fileListing,directory .. subdirectory  .. "/".. subsubdirectory)
-                    end
-                end
+    
+    local function packageDir(directory)
+        local sub = fs.list(directory)
+        for i,subf in pairs(sub) do
+            if fs.isDir(fs.combine(directory, subf)) then
+                packageDir(fs.combine(directory, subf))
+                print("d " ..fs.combine(directory, subf))
+                table.insert(directoryListing,directory .. subf)
             else
-                table.insert(fileListing,directory .. subdirectory)
+                table.insert(fileListing,fs.combine(directory, subf))
+                print("f " .. fs.combine(directory, subf))
             end
         end
     end
 
+    print("Queuing files to be packaged")
+    for i, directory in pairs(directoriesConfig) do
+        packageDir(directory)
+    end
+    
     for i,file in pairs(filesConfig) do
         table.insert(fileListing,file)
     end
