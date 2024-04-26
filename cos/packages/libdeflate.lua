@@ -4,13 +4,12 @@ libdeflate.metadata = {
     description = "A simple archival tool for ComputerCraft",
     author = "JackMacWindows",
     license = "CC0",
-    dependencies = {"libdeflate"}
+    dependencies = {}
 }
 libdeflate.startup = function()
     if not fs.exists("/cos/lib/LibDeflate.lua") then
         local hweb, err = http.get("https://raw.githubusercontent.com/MCJack123/CC-Archive/master/LibDeflate.lua")
         if not hweb then
-            log("Failed to download LibDeflate.lua: " .. err, false, "error")
             error("Failed to download LibDeflate.lua: " .. err)
         end
         local hfile = fs.open("/cos/lib/LibDeflate.lua", "w")
@@ -29,8 +28,7 @@ end
 libdeflate.update = function()
     local hweb, err = http.get("https://raw.githubusercontent.com/MCJack123/CC-Archive/master/LibDeflate.lua")
     if not hweb then
-        log("Failed to download LibDeflate.lua: " .. err, false, "error")
-        error("Failed to download LibDeflate.lua: " .. err)
+        error("Failed to download LibDeflate.lua: " .. err, true)
     end
     local hfile = fs.open("/cos/lib/LibDeflate.lua", "w")
     hfile.write(hweb.readAll())

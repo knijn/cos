@@ -12,7 +12,6 @@ version.startup = function()
     if not fs.exists("/cos/lib/version.lua") then
         local hweb, err = http.get("https://raw.githubusercontent.com/9551-Dev/version/main/version.lua")
         if not hweb then
-            log("Failed to download version.lua: " .. err, false, "error")
             error("Failed to download version.lua: " .. err)
         end
         local hfile = fs.open("/cos/lib/version.lua", "w")
@@ -30,7 +29,6 @@ end
 version.update = function()
     local hweb, err = http.get("https://raw.githubusercontent.com/9551-Dev/version/main/version.lua")
     if not hweb then
-        log("Failed to download version.lua: " .. err, false, "error")
         error("Failed to download version.lua: " .. err)
     end
     local hfile = fs.open("/cos/lib/version.lua", "w")
